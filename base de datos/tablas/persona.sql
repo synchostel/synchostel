@@ -5,6 +5,7 @@ CREATE TABLE persona(
 	rut varchar(9) primary key, -- 99999999k
 	nombre varchar(100),
 	email varchar(100),
+	password varchar(20),
 	telefono int,
 	telefono_2 int,
 	direccion varchar(300),
