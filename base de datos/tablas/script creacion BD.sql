@@ -4,7 +4,9 @@ CREATE TABLE perfil(
 );
 
 CREATE TABLE hostal(
-	run varchar(9) primary key,
+	run varchar(10) primary key,
+	nombre varchar(50),
+	telefono int,
 	sitio_web varchar(100),
 	email varchar(100)
 );
@@ -33,27 +35,28 @@ CREATE TABLE huesped(
 
 CREATE TABLE servicio(
 	id serial primary key,
+	nombre varchar(50),
 	monto_servicio int,
-	descripcion varchar(100)
+	descripcion varchar(300)
 );
 
 CREATE TABLE persona(
-	run varchar(9), -- 99999999k
+	run varchar(10), -- 99999999k
 	CONSTRAINT PK_persona primary key (run),
 	nombre varchar(100),
 	email varchar(100),
-	password varchar(20),
+	password varchar(50),
 	direccion varchar(300),
 	admin boolean,
 	fecha_nacimiento timestamp,
 	fecha_ingreso_hostal timestamp,
 	id_perfil serial references perfil(id) ON DELETE CASCADE,
-	run_hostal varchar(9) references hostal(run) ON DELETE CASCADE
+	run_hostal varchar(10) references hostal(run) ON DELETE CASCADE
 );
 
 CREATE TABLE dia(
 	fecha timestamp primary key,
-	run varchar(9) references hostal(run) ON DELETE CASCADE-- 99999999k
+	run varchar(10) references hostal(run) ON DELETE CASCADE-- 99999999k
 );
 
 CREATE TABLE bloque_horario(
@@ -65,12 +68,12 @@ CREATE TABLE bloque_horario(
 
 CREATE TABLE bloque_asignado(
 	id serial,
-	run varchar(9), -- 99999999k
+	run varchar(10), -- 99999999k
 	id_blq_horario serial,
 	id_tarea serial,
 	primary key (id,run, id_blq_horario, id_tarea),
 	CONSTRAINT FK_persona FOREIGN KEY (run) references persona(run) ON DELETE CASCADE,
-	CONSTRAINT FK_bloque_horario FOREIGN KEY (id_blq_horario) references bloque_horario(id) ON DELETE CASCADE
+	CONSTRAINT FK_bloque_horario FOREIGN KEY (id_blq_horario) references bloque_horario(id) ON DELETE CASCADE,
 	CONSTRAINT FK_tarea FOREIGN KEY (id_tarea) references tarea(id) ON DELETE CASCADE
 );
 
@@ -89,12 +92,12 @@ CREATE TABLE producto(
 	cantidad int,
 	cantidad_critica int,
 	categoria varchar(50),
-	run varchar(9) references hostal(run) ON DELETE CASCADE -- 99999999k
+	run varchar(10) references hostal(run) ON DELETE CASCADE -- 99999999k
 );
 
 CREATE TABLE pieza(
 	id serial primary key,
-	descripcion varchar(200),
+	descripcion varchar(300),
 	compartida boolean,
 	bano boolean, --baño
 	tv boolean,
@@ -102,26 +105,26 @@ CREATE TABLE pieza(
 	caja_fuerte boolean,
 	copa boolean, --copas de vino
 	calefactor boolean,
-	run_hostal varchar(9) references hostal(run) ON DELETE CASCADE
+	run_hostal varchar(10) references hostal(run) ON DELETE CASCADE
 );
 
 CREATE TABLE gasto(
 	id serial primary key,
-	descripcion varchar(100),
+	descripcion varchar(300),
 	monto int,
 	fecha_gasto timestamp,
-	run_hostal varchar(9) references hostal(run)
+	run_hostal varchar(10) references hostal(run)
 );
 
 CREATE TABLE cama(
 	id serial primary key,
-	descripcion varchar(100),
+	descripcion varchar(300),
 	valor int,
 	id_pieza serial references pieza(id) ON DELETE CASCADE
 );
 
 CREATE TABLE telefonos(
-	run varchar(9) references persona(run) ON DELETE CASCADE,
+	run varchar(10) references persona(run) ON DELETE CASCADE,
 	telefono int,
 	primary key (run, telefono)
 );
@@ -133,7 +136,7 @@ CREATE TABLE reserva(
 	medio_pago varchar(100),
 	mapa boolean,
 	pasaporte varchar(50) references huesped(pasaporte) ON DELETE CASCADE, 
-	run_hostal varchar(9) references hostal(run) ON DELETE CASCADE
+	run_hostal varchar(10) references hostal(run) ON DELETE CASCADE
 );
 
 CREATE TABLE cantidad_de_camas(
