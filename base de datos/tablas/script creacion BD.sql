@@ -67,9 +67,11 @@ CREATE TABLE bloque_asignado(
 	id serial,
 	run varchar(9), -- 99999999k
 	id_blq_horario serial,
-	primary key (id,run, id_blq_horario),
+	id_tarea serial,
+	primary key (id,run, id_blq_horario, id_tarea),
 	CONSTRAINT FK_persona FOREIGN KEY (run) references persona(run) ON DELETE CASCADE,
 	CONSTRAINT FK_bloque_horario FOREIGN KEY (id_blq_horario) references bloque_horario(id) ON DELETE CASCADE
+	CONSTRAINT FK_tarea FOREIGN KEY (id_tarea) references tarea(id) ON DELETE CASCADE
 );
 
 CREATE TABLE cantidad_de_permisos(
