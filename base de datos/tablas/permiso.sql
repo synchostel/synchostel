@@ -4,6 +4,5 @@
 CREATE TABLE permiso(
 	id serial primary key,
 	nombre varchar(50),
-	descripcion varchar(300),
-	id serial references cantidad_de_permisos(id)
+	descripcion varchar(300)
 ;)

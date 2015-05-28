@@ -5,6 +5,5 @@ CREATE TABLE boleta(
 	id serial primary key,
 	total int,
 	estado_de_pago boolean,
-	id serial references cantidad_de_servicios(id),
-	id serial references reserva(id)
-;)
+	id serial references reserva(id) ON DELETE CASCADE
+);

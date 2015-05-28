@@ -5,5 +5,6 @@ CREATE TABLE gasto(
 	id serial primary key,
 	descripcion varchar(100),
 	monto int,
-	rut varchar(9) references hostal(rut) -- 
-;)
+	fecha_gasto timestamp,
+	run_hostal references hostal(run)
+);

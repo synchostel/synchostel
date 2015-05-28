@@ -3,7 +3,9 @@
 
 CREATE TABLE cantidad_de_camas(
 	id serial primary key,
-	total int,
-	id serial references cama(id),
-	id serial references reserva(id)
-;)
+	id_cama serial, 
+	id_reserva serial, 
+	primary key (id_reserva,id_cama),
+	CONSTRAINT FK_cama foreing key (id_cama) references cama(id) ON DELETE CASCADE,
+	CONSTRAINT FK_reserva foreing key (id_reserva) references reserva(id) ON DELETE CASCADE
+);

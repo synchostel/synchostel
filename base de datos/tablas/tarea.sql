@@ -6,6 +6,6 @@ CREATE TABLE tarea(
 	nombre varchar(50),
 	descripcion varchar(300), 
 	prioridad varchar(5), --(alta,media,baja)
-	rut varchar(9), references persona(rut) -- 99999999k
+	run varchar(9), references persona(run) -- 99999999k
 	id serial references bloque_horario(id)
 );

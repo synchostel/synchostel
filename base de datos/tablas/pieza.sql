@@ -11,6 +11,5 @@ CREATE TABLE pieza(
 	caja_fuerte boolean,
 	copa boolean, --copas de vino
 	calefactor boolean,
-	id serial references cama(id),
-	rut varchar(9) references hostal(rut) -- 
-;)
+	id_hostal id serial references hostal(id) ON DELETE CASCADE
+);

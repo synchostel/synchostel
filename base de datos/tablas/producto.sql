@@ -6,6 +6,6 @@ CREATE TABLE producto(
 	nombre varchar(100),
 	cantidad int,
 	cantidad_critica int,
-	categoria varchar(50)
-	rut varchar(9) references hostal(rut) -- 99999999k
-;)
+	categoria varchar(50),
+	rut varchar(9) references hostal(rut) ON DELETE CASCADE -- 99999999k
+);

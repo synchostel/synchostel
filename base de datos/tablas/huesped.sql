@@ -7,5 +7,4 @@ CREATE TABLE huesped(
 	nacionalidad varchar(50),
 	vegano boolean,
 	celiaco boolean,
-	id serial references reserva(id),
-;)
+);
