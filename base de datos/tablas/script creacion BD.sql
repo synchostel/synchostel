@@ -7,6 +7,9 @@ CREATE TABLE hostal(
 	run varchar(10) primary key,
 	nombre varchar(50),
 	telefono int,
+	valor_hora int,
+	valor_hora_extra int,
+	iva int,
 	sitio_web varchar(100),
 	email varchar(100)
 );
