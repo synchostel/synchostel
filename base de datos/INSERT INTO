@@ -1,0 +1,15 @@
+﻿INSERT INTO hostal
+	(run, nombre, telefono, valor_hora, valor_hora_extra, iva, sitio_web, email)
+	values (201234567,'Angel hostal', 435678, 15000, 5000, 0.19, 'www.angelhostal.cl','angelhostal@hostal.cl'
+);
+
+
+INSERT INTO perfil
+	(id, nombre)
+	values (4, 'Valeria	Salgado'
+);
+
+INSERT INTO persona
+	(run, nombre, email, password, direccion, admin, fecha_nacimiento, fecha_ingreso_hostal, telefono1, telefono2, id_perfil, run_hostal)
+	values ('18123456k', 'Valeria Salgado', 'v.salgado@gmail.com','ASD','Las Heras 666','true','08/09/1990','01/03/2015', 232425, 313233, 4, 201234567
+);
