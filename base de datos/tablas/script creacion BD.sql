@@ -53,6 +53,8 @@ CREATE TABLE persona(
 	admin boolean,
 	fecha_nacimiento timestamp,
 	fecha_ingreso_hostal timestamp,
+	telefono1 int,
+	telefono2 int,
 	id_perfil serial references perfil(id) ON DELETE CASCADE,
 	run_hostal varchar(10) references hostal(run) ON DELETE CASCADE
 );
@@ -124,12 +126,6 @@ CREATE TABLE cama(
 	descripcion varchar(300),
 	valor int,
 	id_pieza serial references pieza(id) ON DELETE CASCADE
-);
-
-CREATE TABLE telefonos(
-	run varchar(10) references persona(run) ON DELETE CASCADE,
-	telefono int,
-	primary key (run, telefono)
 );
 
 CREATE TABLE reserva(
