@@ -5,4 +5,4 @@ CREATE TABLE servicio(
 	id serial primary key,
 	monto_servicio int,
 	descripcion varchar(100)
-;)
+);

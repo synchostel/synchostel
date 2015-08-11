@@ -6,4 +6,4 @@ CREATE TABLE cama(
 	descripcion varchar(100),
 	valor int,
 	id serial references pieza(id) ON DELETE CASCADE
-;)
+);

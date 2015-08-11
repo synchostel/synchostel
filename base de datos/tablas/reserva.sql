@@ -8,4 +8,4 @@ CREATE TABLE reserva(
 	medio_pago varchar(100),
 	mapa boolean,
 	pasaporte references huesped(pasaporte) ON DELETE CASCADE
-;)
+);
