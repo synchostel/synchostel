@@ -1,5 +1,5 @@
  -- Creación tabla Servicio
--- Versión 1.0 17/05/2015
+ -- Versión 2.0 11/07/2015
 
 CREATE TABLE servicio(
 	id serial primary key,

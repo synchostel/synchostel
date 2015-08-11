@@ -11,6 +11,5 @@ CREATE TABLE persona(
 	admin boolean,
 	fecha_nacimiento timestamp,
 	fecha_ingreso_hostal timestamp,
-	id_perfil serial references perfil(id) ON DELETE CASCADE,
-	run_hostal varchar(9) references hostal(run) ON DELETE CASCADE
+	id_perfil serial references perfil(id) ON DELETE CASCADE
 );

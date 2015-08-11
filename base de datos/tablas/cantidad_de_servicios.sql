@@ -5,7 +5,6 @@ CREATE TABLE cantidad_de_servicios(
 	id serial primary key,
 	id_boleta serial,
 	id_servicio serial,
-	primary key(id_servicio, id_boleta),
 	CONSTRAINT FK_servicio foreing key (id_servicio) references servicio(id) ON DELETE CASCADE,
 	CONSTRAINT FK_boleta foreing key (id_boleta) references boleta(id) ON DELETE CASCADE
 ;)

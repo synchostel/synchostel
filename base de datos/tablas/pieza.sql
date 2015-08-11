@@ -1,5 +1,5 @@
 -- Creación tabla Pieza
--- Versión 1.0 17/05/2015
+-- Versión 2.0 11/07/2015
 
 CREATE TABLE pieza(
 	id serial primary key,
@@ -10,6 +10,5 @@ CREATE TABLE pieza(
 	locker boolean,
 	caja_fuerte boolean,
 	copa boolean, --copas de vino
-	calefactor boolean,
-	id_hostal id serial references hostal(id) ON DELETE CASCADE
+	calefactor boolean
 );
