@@ -1,19 +1,19 @@
 CREATE TABLE perfil(
 	id serial primary key,
-	nombre varchar(50),
+	nombre varchar(50)
 );
 
 CREATE TABLE hostal(
-	run varchar(9) primary key,
+	run varchar(10) primary key,
 	sitio_web varchar(100),
-	email varchar(100),
+	email varchar(100)
 );
 
 CREATE TABLE tarea(
 	id serial primary key,
 	nombre varchar(50),
 	descripcion varchar(300), 
-	prioridad varchar(5), --(alta,media,baja)
+	prioridad varchar(5) --(alta,media,baja)
 );
 
 CREATE TABLE permiso(
@@ -27,7 +27,7 @@ CREATE TABLE huesped(
 	nombre varchar(100),
 	nacionalidad varchar(50),
 	vegano boolean,
-	celiaco boolean,
+	celiaco boolean
 );
 
 CREATE TABLE servicio(
@@ -37,7 +37,7 @@ CREATE TABLE servicio(
 );
 
 CREATE TABLE persona(
-	run varchar(9), -- 99999999k
+	run varchar(10), -- 99999999k
 	CONSTRAINT PK_persona primary key (run),
 	nombre varchar(100),
 	email varchar(100),
@@ -46,37 +46,38 @@ CREATE TABLE persona(
 	admin boolean,
 	fecha_nacimiento timestamp,
 	fecha_ingreso_hostal timestamp,
-	id_perfil serial references perfil(id) ON DELETE CASCADE
+	telefono varchar (12),
+	id_perfil int references perfil(id) ON DELETE CASCADE
 );
 
 CREATE TABLE dia(
-	fecha timestamp primary key,
-	run varchar(9) references hostal(run) ON DELETE CASCADE-- 99999999k
-;)
+	fecha timestamp primary key
+);
 
 CREATE TABLE bloque_horario(
 	id serial primary key,
 	inicio_bloque timestamp,
 	termino_bloque timestamp,
-	fecha timestamp references dia(fecha),
+	fecha timestamp references dia(fecha)
 	);
 
 CREATE TABLE bloque_asignado(
 	id serial primary key,
-	run varchar(9), -- 99999999k
-	id_blq_horario serial,
-	id_tarea serial,
-	CONSTRAINT FK_persona foreing key (run) references persona(run) ON DELETE CASCADE,
-	CONSTRAINT FK_bloque_horario foreing key (id_blq_horario) references bloque_horario(id) ON DELETE CASCADE,
-	CONSTRAINT FK_tarea foreing key (id_tarea) references tarea(id) ON DELETE CASCADE
+	run varchar(10) references persona(run) ON DELETE CASCADE, -- 99999999k
+	id_blq_horario int references bloque_horario(id) ON DELETE CASCADE,
+	id_tarea int references tarea(id) ON DELETE CASCADE
 );
 
 CREATE TABLE cantidad_de_permisos(
 	id serial primary key,
-	id_perfil serial,
-	id_permiso serial,
-	CONSTRAINT FK_perfi foreing key (id_perfil) references perfil(id) ON DELETE CASCADE,
-	CONSTRAINT FK_permiso foreing key (id_permiso) references permiso(id) ON DELETE CASCADE
+	id_perfil int references perfil(id) ON DELETE CASCADE,
+	id_permiso int references permiso(id) ON DELETE CASCADE
+);
+
+CREATE TABLE categoria_producto(
+	id serial primary key,
+	nombre varchar(100),
+	descripcion varchar(250)
 );
 
 CREATE TABLE producto(
@@ -110,7 +111,7 @@ CREATE TABLE cama(
 	id serial primary key,
 	descripcion varchar(100),
 	valor int,
-	id serial references pieza(id) ON DELETE CASCADE
+	id_pieza int references pieza(id) ON DELETE CASCADE
 );
 
 CREATE TABLE reserva(
@@ -119,28 +120,31 @@ CREATE TABLE reserva(
 	fecha_check_out timestamp,
 	medio_pago varchar(100),
 	mapa boolean,
-	pasaporte references huesped(pasaporte) ON DELETE CASCADE
+	pasaporte varchar(50) references huesped(pasaporte) ON DELETE CASCADE
 );
 
 CREATE TABLE cantidad_de_camas(
 	id serial primary key,
-	id_cama serial, 
-	id_reserva serial,
-	CONSTRAINT FK_cama foreing key (id_cama) references cama(id) ON DELETE CASCADE,
-	CONSTRAINT FK_reserva foreing key (id_reserva) references reserva(id) ON DELETE CASCADE
+	id_cama int references cama(id) ON DELETE CASCADE, 
+	id_reserva int references reserva(id) ON DELETE CASCADE
 );
 
 CREATE TABLE boleta(
 	id serial primary key,
 	total int,
 	estado_de_pago boolean,
-	id serial references reserva(id) ON DELETE CASCADE
+	id_reserva int references reserva(id) ON DELETE CASCADE
 );
 
 CREATE TABLE cantidad_de_servicios(
 	id serial primary key,
-	id_boleta serial,
-	id_servicio serial,
-	CONSTRAINT FK_servicio foreing key (id_servicio) references servicio(id) ON DELETE CASCADE,
-	CONSTRAINT FK_boleta foreing key (id_boleta) references boleta(id) ON DELETE CASCADE
+	id_boleta int references boleta(id) ON DELETE CASCADE,
+	id_servicio int references servicio(id) ON DELETE CASCADE
+);
+
+CREATE TABLE link(
+	id serial primary key,
+	nombre	varchar(20),
+	url	varchar(150),
+	descripcion varchar(100)
 );
