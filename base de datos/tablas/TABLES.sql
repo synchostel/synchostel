@@ -4,7 +4,8 @@ CREATE TABLE perfil(
 );
 
 CREATE TABLE hostal(
-	run varchar(10) primary key,
+	id serial primary key,
+	run varchar(12) UNIQUE,
 	sitio_web varchar(100),
 	email varchar(100)
 );
@@ -23,7 +24,8 @@ CREATE TABLE permiso(
 );
 
 CREATE TABLE huesped(
-	pasaporte varchar(50) primary key,
+	id serial primary key,
+	pasaporte varchar(50),
 	nombre varchar(100),
 	nacionalidad varchar(50),
 	vegano boolean,
@@ -37,8 +39,8 @@ CREATE TABLE servicio(
 );
 
 CREATE TABLE persona(
-	run varchar(10), -- 99999999k
-	CONSTRAINT PK_persona primary key (run),
+	id serial primary key,
+	run varchar(12) UNIQUE, -- 99999999k
 	nombre varchar(100),
 	email varchar(100),
 	password varchar(20),
@@ -63,7 +65,7 @@ CREATE TABLE bloque_horario(
 
 CREATE TABLE bloque_asignado(
 	id serial primary key,
-	run varchar(10) references persona(run) ON DELETE CASCADE, -- 99999999k
+	id_persona int references persona(id) ON UPDATE CASCADE ON DELETE CASCADE, 
 	id_blq_horario int references bloque_horario(id) ON DELETE CASCADE,
 	id_tarea int references tarea(id) ON DELETE CASCADE
 );
@@ -120,7 +122,7 @@ CREATE TABLE reserva(
 	fecha_check_out timestamp,
 	medio_pago varchar(100),
 	mapa boolean,
-	pasaporte varchar(50) references huesped(pasaporte) ON DELETE CASCADE
+	id_huesped int references huesped(id) ON DELETE CASCADE
 );
 
 CREATE TABLE cantidad_de_camas(
