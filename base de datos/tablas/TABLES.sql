@@ -92,6 +92,7 @@ CREATE TABLE producto(
 
 CREATE TABLE pieza(
 	id serial primary key,
+	nombre varchar(50),
 	descripcion varchar(200),
 	compartida boolean,
 	bano boolean, --baño
@@ -111,6 +112,7 @@ CREATE TABLE gasto(
 
 CREATE TABLE cama(
 	id serial primary key,
+	nombre varchar(50),
 	descripcion varchar(100),
 	valor int,
 	id_pieza int references pieza(id) ON DELETE CASCADE
@@ -122,13 +124,9 @@ CREATE TABLE reserva(
 	fecha_check_out timestamp,
 	medio_pago varchar(100),
 	mapa boolean,
-	id_huesped int references huesped(id) ON DELETE CASCADE
-);
-
-CREATE TABLE cantidad_de_camas(
-	id serial primary key,
-	id_cama int references cama(id) ON DELETE CASCADE, 
-	id_reserva int references reserva(id) ON DELETE CASCADE
+	activa boolean DEFAULT true,
+	id_huesped int references huesped(id) ON DELETE CASCADE,
+	id_cama int references cama(id) ON DELETE CASCADE
 );
 
 CREATE TABLE boleta(
@@ -141,7 +139,9 @@ CREATE TABLE boleta(
 CREATE TABLE cantidad_de_servicios(
 	id serial primary key,
 	id_boleta int references boleta(id) ON DELETE CASCADE,
-	id_servicio int references servicio(id) ON DELETE CASCADE
+	id_servicio int references servicio(id) ON DELETE CASCADE,
+	monto_servicio int,
+	descripcion varchar(100)
 );
 
 CREATE TABLE link(
